@@ -15,23 +15,21 @@ You can run it in one of two ways:
 
 ## Phase I of development
 Includes a simpler UI through which the Strafer and Monitor are configured and errors during runs are shown.
-
-## Phase II of development:
-UI includes a performance graph with the data gathered by the Monitor, as well provide a CSV report on demand.
-
-## Phase II of development:
-Monitor can control Strafer to stop or start strafing. 
-Strafer can also show the graph of monitoring results
-
-## Databases to cover
-In order of development:
+Support for:
 1. PostgreSQL
 2. MySQL
 3. Oracle
 4. SQL Server
-5. DB2
-6. MongoDB
 
+## Phase II of development:
+UI includes a performance graph with the data gathered by the Monitor, as well as provide a CSV report on demand.
+Support for:
+1. DB2
+2. MongoDB
+
+## Phase II of development:
+Monitor can control Strafer to stop or start strafing. 
+Strafer can also show the graph of monitoring results
 
 
 ## This is a work in progress - watch this space to see it grow!

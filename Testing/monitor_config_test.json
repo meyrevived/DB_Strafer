@@ -1,0 +1,5 @@
+{
+    "monitoring_elements" : ["CPU", "RAM", "DS", "ALL"],
+    "monitoring_frequency_secs" : "0.4",
+    "write_report" : "True"
+}

@@ -1,0 +1,25 @@
+{
+    "strafer": {
+        "db_config": {
+            "db_type" : "postgresql",
+            "user_name" : "system",
+            "password": "Barbapapa12#",
+            "IP" : "10.10.10.10",
+            "port": "5432",
+            "instance": "n/a",
+            "schema" : "n/a",
+            "queries" : "SELECT version();"
+        },
+        "strafing_config": {
+            "frequency_secs" : "30",
+            "strafing_threads_num" : "1",
+            "strafing_cycles_num" : "3",
+            "strafe_endlessly" : "False" 
+        }
+    },
+    "monitor" : {
+        "monitoring_elements" : ["CPU", "RAM", "DS", "ALL"],
+        "monitoring_frequency_secs" : "0.4",
+        "write_report" : "True"
+    }
+}
