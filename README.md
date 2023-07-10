@@ -1,3 +1,5 @@
+Currently work is done in phase_I branch, switch to it to look at code progress
+
 # DB_Strafer
 
 A tool for stress and performance tests on databases that monitors CPU, RAM and disk space abuse simultaniously. Contains two components:
