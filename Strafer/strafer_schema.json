@@ -1,0 +1,27 @@
+{
+    "type" : "object",
+    "properties" : {
+        "db_config" : {
+          "type" : "object",
+          "properties" : {
+            "db_type" : {"type" : "string"},
+            "user_name" : {"type" : "string"},
+            "password": {"type" : "string"},
+            "IP" : {"type" : "string"},
+            "port": {"type" : "string"},
+            "instance": {"type" : "string"},
+            "schema" : {"type" : "string"},
+            "queries" : {"type" : "array"}
+          }
+        },
+        "strafing_config" : {
+          "type" : "object",
+          "properties" : {
+            "frequency_secs" : {"type" : "number"},
+            "strafing_threads_num" : {"type" : "number"},
+            "strafing_cycles_num" : {"type" : "number"},
+            "strafe_endlessly" : {"type" : "boolean"}
+          }
+        }
+    }
+}

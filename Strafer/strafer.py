@@ -2,8 +2,10 @@
 from typing import List
 from threading import Thread
 from time import sleep
+import json
 
 from querier import Querier
+from Utilities.validation import validate_json
 
 # database configuration
 _DB_TYPE = ""
@@ -30,9 +32,7 @@ def run_strafer() -> None:
     # DEBUG
     print("run_strafer started running")
 
-    if not load_configuration():
-        # break here
-        pass
+    load_configuration()
 
     queriers = []
 
@@ -56,6 +56,7 @@ def create_querier(queries: List[str]) -> Querier:
     """
     # DEBUG
     print("create_querier started running")
+    # code
 
 
 def strifing_element(queriers: List[Querier]) -> None:
@@ -75,10 +76,37 @@ def strifing_element(queriers: List[Querier]) -> None:
         querier_thread.join()
 
 
-def load_configuration(config_json_path: str) -> True:
+def load_configuration(config_json_path: str) -> None:
     """
-    Load configuration from configuration JSON (for now!) and saves them in the configuration variables
+    Load configuration from configuration JSON and saves them in the configuration variables
     """
     # DEBUG
     print("load_configuration started running")
-    
+
+    # validate configuration json is valid
+    if validate_json(config_json_path, "strafer"):
+        
+        try:
+            # configuration json is valid, we can use data from it to configure the Strafer
+            with open(config_json_path) as config_json:
+                config_data = json.load(config_json)
+
+                _DB_TYPE = config_data["db_config"]["db_type"]
+                _USER_NAME = config_data["db_config"]["user_name"]
+                _PASSWORD = config_data["db_config"]["password"]
+                _IP = config_data["db_config"]["IP"]
+                _PORT = config_data["db_config"]["port"]
+                _INSTANCE = config_data["db_config"]["instance"]
+                _SCHEMA = config_data["db_config"]["schema"]
+                _QUERIES = config_data["db_config"]["queries"]
+
+                _FREQUENCY_SECS = config_data["strafing_config"]["frequency_secs"]
+                _STRAFING_THREADS_NUM = config_data["strafing_config"]["strafing_threads_num"]
+                _STRAFING_CYCLES_NUM = config_data["strafing_config"]["strafing_cycles_num"]
+                _STRAFE_ENDLESSLY = config_data["strafing_config"]["strafe_endlessly"]
+
+        except OSError:
+            # DEBUG
+            print(f"Cannot open configuration file at {config_json_path}")
+            raise SystemExit
+        

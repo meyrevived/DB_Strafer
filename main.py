@@ -40,82 +40,86 @@ if __name__ == "__main__":
 
     while True: 
  
-        
-        # Accepts “duo” / “monitor” / “strafer”
-        mode = input("""
-            How would you like to run DB Strafer?
-                
-                1. Duo mode
+        try:
+            # Accepts “duo” / “monitor” / “strafer”
+            mode = input("""
+                How would you like to run DB Strafer?
+                    
+                    1. Duo mode
 
-                2. Split mode
-        
-            If you didn't mean to run DB Strafer, type 'quit'
+                    2. Split mode
             
-            Your choice: """)
-
-        
-        if mode.lower() in ("duo", "1"):
-            # DEBUG
-            print("You chose due mode")
-            
-            ## code ##
-            main.run_process(logger.run_logger)
-            main.run_process(monitor.run_monitor)
-            main.run_process(strafer.run_strafer)
-            break
-        elif mode.lower() in ("split", "2"):
-            # DEBUG
-            print("You chose split mode")
-
-            main.clear()
-
-            component = input("""
-                Which component would you like to be running?
-
-                    1. Strafer
-
-                    2. Monitor 
-
                 If you didn't mean to run DB Strafer, type 'quit'
-                To go back to the previous menue, type 'back'
-
+                
                 Your choice: """)
 
-            if component.lower() in ("strafer", "1"):
+            
+            if mode.lower() in ("duo", "1"):
                 # DEBUG
-                print("You chose to run a Strafer")
-
-                main.run_process(logger.run_logger)
-                main.run_process(strafer.run_strafer)
-                break
-            elif component.lower() in ("monitor", "2"):
-                # DEBUG
-                print("You chose to run a Monitor")
-
+                print("You chose due mode")
+                
+                ## code ##
                 main.run_process(logger.run_logger)
                 main.run_process(monitor.run_monitor)
+                main.run_process(strafer.run_strafer)
                 break
-            elif component.lower() == "quit":
+            elif mode.lower() in ("split", "2"):
+                # DEBUG
+                print("You chose split mode")
+
+                main.clear()
+
+                component = input("""
+                    Which component would you like to be running?
+
+                        1. Strafer
+
+                        2. Monitor 
+
+                    If you didn't mean to run DB Strafer, type 'quit'
+                    To go back to the previous menue, type 'back'
+
+                    Your choice: """)
+
+                if component.lower() in ("strafer", "1"):
+                    # DEBUG
+                    print("You chose to run a Strafer")
+
+                    main.run_process(logger.run_logger)
+                    main.run_process(strafer.run_strafer)
+                    break
+                elif component.lower() in ("monitor", "2"):
+                    # DEBUG
+                    print("You chose to run a Monitor")
+
+                    main.run_process(logger.run_logger)
+                    main.run_process(monitor.run_monitor)
+                    break
+                elif component.lower() == "quit":
+                    # DEBUG 
+                    print("You chose to quit")
+                    break
+                elif component.lower() == "back":
+                    # DEBUG 
+                    main.clear()
+                    print(mode_error_msg)
+                else:
+                    main.clear()
+                    print(component_error_msg)
+
+            elif mode.lower() == "quit":
                 # DEBUG 
                 print("You chose to quit")
+
+                ## code ##
                 break
-            elif component.lower() == "back":
-                # DEBUG 
-                main.clear()
-                print(mode_error_msg)
             else:
                 main.clear()
-                print(component_error_msg)
-
-        elif mode.lower() == "quit":
-            # DEBUG 
-            print("You chose to quit")
-
-            ## code ##
-            break
-        else:
-            main.clear()
-            print(mode_error_msg)
+                print(mode_error_msg)
+        
+        except SystemExit:
+            # DEBUG
+            print("Something went wrong, DB Strafer had to exit")
 
 
         
@@ -123,8 +127,4 @@ if __name__ == "__main__":
         # Monitor / Strafer are processes
 
         # Starts logging before other processes
-
-        # In “duo” mode, starts Monitor before Strafer
-
-        # Gracefully exit
 

@@ -10,6 +10,7 @@ class Querier:
         run_start_time = datetime.now().strftime("%H:%M:%S")
         # DEBUG
         print("run_querier started running")
+        # code
         run_end_time = datetime.now().strftime("%H:%M:%S")
         print(f"run_querier started at {run_start_time}")
         print(f"run_querier ended at {run_end_time}")

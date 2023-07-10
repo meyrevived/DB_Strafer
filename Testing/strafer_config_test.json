@@ -7,12 +7,12 @@
         "port": "5432",
         "instance": "template1",
         "schema" : "n/a",
-        "queries" : "SELECT version();"
+        "queries" : ["SELECT version();"]
     },
     "strafing_config": {
         "frequency_secs" : 30,
         "strafing_threads_num" : 1,
         "strafing_cycles_num" : 3,
-        "strafe_endlessly" : "False" 
+        "strafe_endlessly" : false 
     }
 }
