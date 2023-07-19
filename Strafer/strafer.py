@@ -4,7 +4,7 @@ from threading import Thread
 from time import sleep
 import json
 
-from querier import Querier
+from Queriers.abs_querier import Querier
 from Utilities.validation import validate_json
 
 # database configuration
@@ -12,7 +12,7 @@ _DB_TYPE = ""
 _USER_NAME = ""
 _PASSWORD = ""
 _IP = ""
-_PORT = ""
+_PORT = ""                                                       
 _INSTANCE = ""
 _SCHEMA = "N/A"
 _QUERIES = []
@@ -42,11 +42,11 @@ def run_strafer() -> None:
 
     if not _STRAFE_ENDLESSLY:
         for strafing_cycle in range(_STRAFING_CYCLES_NUM):
-            strifing_element(queriers)
+            strafing_element(queriers)
             sleep(_FREQUENCY_SECS)
     else:
         while True:
-            strifing_element(queriers)
+            strafing_element(queriers)
             sleep(_FREQUENCY_SECS)
 
 
@@ -59,7 +59,7 @@ def create_querier(queries: List[str]) -> Querier:
     # code
 
 
-def strifing_element(queriers: List[Querier]) -> None:
+def strafing_element(queriers: List[Querier]) -> None:
     """
     Recieves a list of queriers and starts them running, then waits for them to finish running
     """
