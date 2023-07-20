@@ -5,7 +5,7 @@ Currently work is done in phase_I branch, switch to it to look at code progress
 A tool for stress and performance tests on databases that monitors CPU, RAM and disk space abuse simultaniously. Contains two components:
 
 ### Strafer
-A prcess that connects to a database and runs queries from an SQL file the user provides, at whichever frequency the user configures.
+A process that connects to a database and runs queries from an SQL file the user provides, at whichever frequency the user configures.
 
 ### Monitor
 A process that gathers information about CPU, RAM and disk space usage from the database server at a frequency the user configures. Can create a CSV report with its findings at user's request. 
