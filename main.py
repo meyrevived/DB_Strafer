@@ -3,7 +3,7 @@
 import sys
 
 
-import Utilities.main_utils as main
+import Utilities.main_utils
 import Monitor.monitor as monitor
 import Strafer.strafer as strafer
 import Utilities.logger as logger
@@ -59,15 +59,15 @@ if __name__ == "__main__":
                 print("You chose due mode")
                 
                 ## code ##
-                main.run_process(logger.run_logger)
-                main.run_process(monitor.run_monitor)
-                main.run_process(strafer.run_strafer)
+                Utilities.main_utils.run_process(logger.run_logger)
+                Utilities.main_utils.run_process(monitor.run_monitor)
+                Utilities.main_utils.run_process(strafer.run_strafer)
                 break
             elif mode.lower() in ("split", "2"):
                 # DEBUG
                 print("You chose split mode")
 
-                main.clear()
+                Utilities.main_utils.clear()
 
                 component = input("""
                     Which component would you like to be running?
@@ -85,15 +85,15 @@ if __name__ == "__main__":
                     # DEBUG
                     print("You chose to run a Strafer")
 
-                    main.run_process(logger.run_logger)
-                    main.run_process(strafer.run_strafer)
+                    Utilities.main_utils.run_process(logger.run_logger)
+                    Utilities.main_utils.run_process(strafer.run_strafer)
                     break
                 elif component.lower() in ("monitor", "2"):
                     # DEBUG
                     print("You chose to run a Monitor")
 
-                    main.run_process(logger.run_logger)
-                    main.run_process(monitor.run_monitor)
+                    Utilities.main_utils.run_process(logger.run_logger)
+                    Utilities.main_utils.run_process(monitor.run_monitor)
                     break
                 elif component.lower() == "quit":
                     # DEBUG 
@@ -101,10 +101,10 @@ if __name__ == "__main__":
                     break
                 elif component.lower() == "back":
                     # DEBUG 
-                    main.clear()
+                    Utilities.main_utils.clear()
                     print(mode_error_msg)
                 else:
-                    main.clear()
+                    Utilities.main_utils.clear()
                     print(component_error_msg)
 
             elif mode.lower() == "quit":
@@ -114,7 +114,7 @@ if __name__ == "__main__":
                 ## code ##
                 break
             else:
-                main.clear()
+                Utilities.main_utils.clear()
                 print(mode_error_msg)
         
         except SystemExit:
