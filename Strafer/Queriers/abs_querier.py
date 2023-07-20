@@ -1,19 +1,17 @@
 from datetime import datetime
-from typing import List
 from abc import ABC, abstractmethod
-
 
 
 class Querier(ABC):
 
-    def __init__(self, user_name: str, password: str, ip: str, port: str, instance: str, schema: str, queries: List[str]) -> None:
-        self._user_name = user_name
-        self._password = password
-        self._ip = ip
-        self._port = port
-        self._instace = instance
-        self._schema = schema
-        self._queries = queries
+    def __init__(self, config_dictionary: dict) -> None:
+        self._user_name = config_dictionary["user_name"]
+        self._password = config_dictionary["password"]
+        self._ip = config_dictionary["ip"]
+        self._port = config_dictionary["port"]
+        self._db_name = config_dictionary["db_name"]
+        self._schema = config_dictionary["schema"]
+        self._queries = config_dictionary["queries"]
 
     def run_querier(self) -> None:
         run_start_time = datetime.now().strftime("%H:%M:%S")
@@ -36,5 +34,5 @@ class Querier(ABC):
 class QuerierFactory(ABC):
 
     @abstractmethod
-    def get_querier(self, user_name: str, password: str, ip: str, port: str, instance: str, schema: str, queries: List[str]) -> Querier:
+    def get_querier(self, config_dictionary: dict) -> Querier:
         pass

@@ -13,7 +13,7 @@ class PostgreSQLQuerier(Querier):
 
             postgresql_connection = psycopg2.connect(
             host = self._ip,
-            dbname = self._instace,
+            dbname = self._db_name,
             user = self._user_name,
             password = self._password,
             port = self._port
@@ -42,5 +42,5 @@ class PostgreSQLQuerier(Querier):
 
 class PostgreSQLQuerierFactory(QuerierFactory):
 
-    def get_querier(self, user_name: str, password: str, ip: str, port: str, instance: str, schema: str, queries: List[str]) -> Querier:
-        return PostgreSQLQuerier(user_name, password, ip, port, instance, schema, queries)
+    def get_querier(self, config_dictionary: dict) -> Querier:
+        return PostgreSQLQuerier(config_dictionary)

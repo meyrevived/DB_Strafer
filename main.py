@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 
 import sys
+from time import sleep
 
 
 import Utilities.main_utils
-import Monitor.monitor as monitor
-import Strafer.strafer as strafer
-import Utilities.logger as logger
+from Monitor.monitor import Monitor
+from Strafer.strafer import Strafer
+from Utilities.logger import Logger
 
 
 mode_error_msg = """
@@ -41,6 +42,8 @@ if __name__ == "__main__":
     while True: 
  
         try:
+
+            _LOGGER = Logger()
             # Accepts “duo” / “monitor” / “strafer”
             mode = input("""
                 How would you like to run DB Strafer?
@@ -56,12 +59,16 @@ if __name__ == "__main__":
             
             if mode.lower() in ("duo", "1"):
                 # DEBUG
-                print("You chose due mode")
-                
-                ## code ##
-                Utilities.main_utils.run_process(logger.run_logger)
-                Utilities.main_utils.run_process(monitor.run_monitor)
-                Utilities.main_utils.run_process(strafer.run_strafer)
+                print("""You chose due mode. 
+                      Strafer will start running two minutes after Monitor begins to run""")
+
+                _STRAFER = Strafer()
+                _MONITOR = Monitor()
+
+                Utilities.main_utils.run_process(_LOGGER.run_logger)
+                Utilities.main_utils.run_process(_MONITOR.run_monitor)
+                sleep(120)
+                Utilities.main_utils.run_process(_STRAFER.run_strafer)
                 break
             elif mode.lower() in ("split", "2"):
                 # DEBUG
@@ -85,15 +92,19 @@ if __name__ == "__main__":
                     # DEBUG
                     print("You chose to run a Strafer")
 
-                    Utilities.main_utils.run_process(logger.run_logger)
-                    Utilities.main_utils.run_process(strafer.run_strafer)
+                    _STRAFER = Strafer()
+
+                    Utilities.main_utils.run_process(_LOGGER.run_logger)
+                    Utilities.main_utils.run_process(_STRAFER.run_strafer)
                     break
                 elif component.lower() in ("monitor", "2"):
                     # DEBUG
                     print("You chose to run a Monitor")
 
-                    Utilities.main_utils.run_process(logger.run_logger)
-                    Utilities.main_utils.run_process(monitor.run_monitor)
+                    _MONITOR = Monitor()
+
+                    Utilities.main_utils.run_process(_LOGGER.run_logger)
+                    Utilities.main_utils.run_process(_MONITOR.run_monitor)
                     break
                 elif component.lower() == "quit":
                     # DEBUG 
