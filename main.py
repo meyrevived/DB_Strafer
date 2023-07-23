@@ -33,6 +33,8 @@ component_error_msg = """
 
         Your choice: """
 
+_LOGGING_DIRECTOR_PATH = ""
+
 if __name__ == "__main__":
 
     print("""
@@ -43,7 +45,14 @@ if __name__ == "__main__":
  
         try:
 
-            _LOGGER = Logger()
+            path_to_logs = input("""
+                Please provide a path for this run's logs. 
+                The path much be a directory.
+                Your path: 
+                                 """)
+
+            _LOGGER = Logger(path_to_logs)
+
             # Accepts “duo” / “monitor” / “strafer”
             mode = input("""
                 How would you like to run DB Strafer?
