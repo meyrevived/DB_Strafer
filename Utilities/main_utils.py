@@ -2,8 +2,7 @@ import os
 import subprocess
 from multiprocessing import Process
 from typing import Callable
-import platform
-from pathlib import Path
+
 
 TIME_TO_RUN_TESTS = 60 * 60  * 24 * 4
 
@@ -35,36 +34,5 @@ def run_process(function: Callable[[], None]) -> None:
         p.join()
 
 
-def create_logging_directory() -> str:
-        
-        is_windows = False 
-        logs_dir_path = ""
 
-        if platform.system() == "Windows":
-             is_windows = True 
-
-        cwd = Path.cwd()
-
-        try:
-            # create the logs and counters directory
-            if is_windows:
-                logs_dir_path = f"{cwd}\\Logs"
-            else:
-                logs_dir_path = f"{cwd}/Logs"
-
-            if not os.path.exists(logs_dir_path):
-                os.makedirs(logs_dir_path)
-
-            # creates counters file 
-            with open()
-
-            # creates log file
-            
-        except Exception as e:
-            # DEBUG
-            print(f"""
-                  Cannot create Logger, encountered
-                  {e} 
-                  """)
-            raise SystemExit
 
