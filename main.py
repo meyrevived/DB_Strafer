@@ -52,7 +52,7 @@ if __name__ == "__main__":
                 Your path: 
                                  """)
 
-            _LOGGER = Logger(path_to_logs)
+            _LOGGING_DIRECTOR_PATH = Utilities.main_utils.create_logging_directory(path_to_logs)
 
             # Accepts “duo” / “monitor” / “strafer”
             mode = input("""
@@ -71,7 +71,12 @@ if __name__ == "__main__":
                 # DEBUG
                 print("""You chose due mode. 
                       Strafer will start running two minutes after Monitor begins to run""")
+                
+                mode
 
+                strafer_counters = strafer_counters.StraferCounters(_LOGGING_DIRECTOR_PATH)
+                monitor_counters = monitor_counters.MonitorCounters(_LOGGING_DIRECTOR_PATH)
+                _LOGGER = Logger(_LOGGING_DIRECTOR_PATH)
                 _STRAFER = Strafer()
                 _MONITOR = Monitor()
 
@@ -102,6 +107,8 @@ if __name__ == "__main__":
                     # DEBUG
                     print("You chose to run a Strafer")
 
+                    strafer_counters = strafer_counters.StraferCounters(_LOGGING_DIRECTOR_PATH)
+                    _LOGGER = Logger(_LOGGING_DIRECTOR_PATH)
                     _STRAFER = Strafer()
 
                     Utilities.main_utils.run_process(_LOGGER.run_logger)
@@ -111,6 +118,8 @@ if __name__ == "__main__":
                     # DEBUG
                     print("You chose to run a Monitor")
 
+                    monitor_counters = monitor_counters.MonitorCounters(_LOGGING_DIRECTOR_PATH)
+                    _LOGGER = Logger(_LOGGING_DIRECTOR_PATH)
                     _MONITOR = Monitor()
 
                     Utilities.main_utils.run_process(_LOGGER.run_logger)
