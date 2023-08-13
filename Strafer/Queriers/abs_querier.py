@@ -19,7 +19,7 @@ class Querier(ABC):
         print("run_querier started running")
 
         self.run_queries()
- 
+
         # DEBUG
         run_end_time = datetime.now().strftime("%H:%M:%S")
         print(f"run_querier started at {run_start_time}")
@@ -27,12 +27,11 @@ class Querier(ABC):
 
     @abstractmethod
     def run_queries(self) -> None:
-        pass
-
+        ...
 
 
 class QuerierFactory(ABC):
 
     @abstractmethod
     def get_querier(self, config_dictionary: dict) -> Querier:
-        pass
+        ...

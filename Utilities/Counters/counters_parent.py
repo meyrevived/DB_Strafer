@@ -1,26 +1,33 @@
 from __future__ import annotations
+from abc import ABCMeta, abstractmethod
 
 from time import sleep
 
-class Counters:
 
-    __instance = None
+class Counters(object):
 
-    @staticmethod
-    def get_instance() -> Counters:
-        if Counters.__instance == None:
-            #DEBUG
-            print("Counters called but not initialized")
-            raise SystemExit  
-        return Counters.__instance
-    
-    def __init__(self, log_dir_path: str) -> None:
+    def __init__(self, log_dir_path: str):
         self._counters_file_path = f"{log_dir_path}counters"
-        self._counters_dict = {}
+
+    __INSTANCE: Counters = None
+
+    @classmethod
+    def singleton(cls) -> Counters:
+        if cls._INSTANCE is None:
+            cls._INSTANCE = cls.create_singleton()
+            return cls._INSTANCE
+
+    @classmethod
+    @abstractmethod
+    def create_singleton(cls) -> Counters:
+        ...
+
+    @abstractmethod
+    def get_instance() -> Counters:
+        ...
 
     def write_to_file(self) -> None:
         with open(self._counters_file_path) as counters_file:
-            counters_file.write(self._counters_dict)
-        
-        sleep(15)
+            counters_file.write(self.__dict__)
 
+        sleep(15)

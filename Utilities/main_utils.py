@@ -4,18 +4,20 @@ from multiprocessing import Process
 from typing import Callable
 import platform
 from pathlib import Path
+from enum import Enum, auto
 
 
-TIME_TO_RUN_TESTS = 60 * 60  * 24 * 4
+TIME_TO_RUN_TESTS = 60 * 60 * 24 * 4
+
 
 def clear() -> None:
     """
     Clearing the console between screens in  the main menue for choosing mode and module.
     Code taken from https://stackoverflow.com/questions/517970/how-to-clear-the-interpreter-console
     """
-    if os.name in ('nt','dos'):
+    if os.name in ('nt', 'dos'):
         subprocess.call("cls")
-    elif os.name in ('linux','osx','posix'):
+    elif os.name in ('linux', 'osx', 'posix'):
         subprocess.call("clear")
     else:
         print("\n") * 120
@@ -35,35 +37,38 @@ def run_process(function: Callable[[], None]) -> None:
         p.terminate()
         p.join()
 
+
 def create_logging_directory(self) -> str:
-        
-        is_windows = False 
-        logs_dir_path = ""
 
-        if platform.system() == "Windows":
-             is_windows = True 
+    is_windows = False
+    logs_dir_path = ""
 
-        cwd = Path.cwd()
+    if platform.system() == "Windows":
+        is_windows = True
 
-        try:
-            # create the logs and counters directory
-            if is_windows:
-                logs_dir_path = f"{cwd}\\Logs\\"
-            else:
-                logs_dir_path = f"{cwd}/Logs/"
+    cwd = Path.cwd()
 
-            if not os.path.exists(logs_dir_path):
-                os.makedirs(logs_dir_path)
+    try:
+        # create the logs and counters directory
+        if is_windows:
+            logs_dir_path = f"{cwd}\\Logs\\"
+        else:
+            logs_dir_path = f"{cwd}/Logs/"
 
-  
-            
-        except Exception as e:
-            # DEBUG
-            print(f"""
+        if not os.path.exists(logs_dir_path):
+            os.makedirs(logs_dir_path)
+
+    except Exception as e:
+        # DEBUG
+        print(f"""
                   Cannot create Logger, encountered
                   {e} 
                   """)
-            raise SystemExit
+        raise SystemExit
 
 
+class Mode(Enum):
 
+    STRAFER = auto()
+    MONITOR = auto()
+    DUO = auto()
