@@ -42,8 +42,8 @@ if __name__ == "__main__":
         Welcome to the DB Strafer, your stress and monitoring tool for databases
     """)
 
-    while True: 
- 
+    while True:
+
         try:
 
             path_to_logs = input("""
@@ -52,7 +52,8 @@ if __name__ == "__main__":
                 Your path: 
                                  """)
 
-            _LOGGING_DIRECTOR_PATH = Utilities.main_utils.create_logging_directory(path_to_logs)
+            _LOGGING_DIRECTOR_PATH = Utilities.main_utils.create_logging_directory(
+                path_to_logs)
 
             # Accepts “duo” / “monitor” / “strafer”
             mode = input("""
@@ -66,17 +67,17 @@ if __name__ == "__main__":
                 
                 Your choice: """)
 
-            
             if mode.lower() in ("duo", "1"):
                 # DEBUG
                 print("""You chose due mode. 
                       Strafer will start running two minutes after Monitor begins to run""")
-                
-                mode
 
-                strafer_counters = strafer_counters.StraferCounters(_LOGGING_DIRECTOR_PATH)
-                monitor_counters = monitor_counters.MonitorCounters(_LOGGING_DIRECTOR_PATH)
-                _LOGGER = Logger(_LOGGING_DIRECTOR_PATH)
+                strafer_counters = strafer_counters.StraferCounters(
+                    _LOGGING_DIRECTOR_PATH)
+                monitor_counters = monitor_counters.MonitorCounters(
+                    _LOGGING_DIRECTOR_PATH)
+                _LOGGER = Logger(_LOGGING_DIRECTOR_PATH,
+                                 Utilities.main_utils.Mode.DUO)
                 _STRAFER = Strafer()
                 _MONITOR = Monitor()
 
@@ -107,8 +108,10 @@ if __name__ == "__main__":
                     # DEBUG
                     print("You chose to run a Strafer")
 
-                    strafer_counters = strafer_counters.StraferCounters(_LOGGING_DIRECTOR_PATH)
-                    _LOGGER = Logger(_LOGGING_DIRECTOR_PATH)
+                    strafer_counters = strafer_counters.StraferCounters(
+                        _LOGGING_DIRECTOR_PATH)
+                    _LOGGER = Logger(_LOGGING_DIRECTOR_PATH,
+                                     Utilities.main_utils.Mode.STRAFER)
                     _STRAFER = Strafer()
 
                     Utilities.main_utils.run_process(_LOGGER.run_logger)
@@ -118,19 +121,21 @@ if __name__ == "__main__":
                     # DEBUG
                     print("You chose to run a Monitor")
 
-                    monitor_counters = monitor_counters.MonitorCounters(_LOGGING_DIRECTOR_PATH)
-                    _LOGGER = Logger(_LOGGING_DIRECTOR_PATH)
+                    monitor_counters = monitor_counters.MonitorCounters(
+                        _LOGGING_DIRECTOR_PATH)
+                    _LOGGER = Logger(_LOGGING_DIRECTOR_PATH,
+                                     Utilities.main_utils.Mode.MONITOR)
                     _MONITOR = Monitor()
 
                     Utilities.main_utils.run_process(_LOGGER.run_logger)
                     Utilities.main_utils.run_process(_MONITOR.run_monitor)
                     break
                 elif component.lower() == "quit":
-                    # DEBUG 
+                    # DEBUG
                     print("You chose to quit")
                     break
                 elif component.lower() == "back":
-                    # DEBUG 
+                    # DEBUG
                     Utilities.main_utils.clear()
                     print(mode_error_msg)
                 else:
@@ -138,7 +143,7 @@ if __name__ == "__main__":
                     print(component_error_msg)
 
             elif mode.lower() == "quit":
-                # DEBUG 
+                # DEBUG
                 print("You chose to quit")
 
                 ## code ##
@@ -146,15 +151,11 @@ if __name__ == "__main__":
             else:
                 Utilities.main_utils.clear()
                 print(mode_error_msg)
-        
+
         except SystemExit:
             # DEBUG
             print("Something went wrong, DB Strafer had to exit")
 
-
-        
-
         # Monitor / Strafer are processes
 
         # Starts logging before other processes
-

@@ -4,6 +4,7 @@ import psycopg2
 
 from abs_querier import Querier, QuerierFactory
 
+
 class PostgreSQLQuerier(Querier):
 
     def run_queries(self) -> None:
@@ -12,32 +13,35 @@ class PostgreSQLQuerier(Querier):
             print("run_queries for PostgreSQL is running")
 
             postgresql_connection = psycopg2.connect(
-            host = self._ip,
-            dbname = self._db_name,
-            user = self._user_name,
-            password = self._password,
-            port = self._port
+                host=self._ip,
+                dbname=self._db_name,
+                user=self._user_name,
+                password=self._password,
+                port=self._port
             )
+
+            self._COUNTERS.increase__logins_run_counter(1)
 
             cursor = postgresql_connection.cursor()
 
-            # DEBUG 
+            # DEBUG
             print("Successfully connected to PostgreSQL")
 
             for query in self._queries:
                 cursor.execute(query)
+                self._COUNTERS.increase_queries_run_counter(1)
 
             cursor.close()
+            self._COUNTERS.increase_logouts_run_counter(1)
 
-        except(Exception, psycopg2.DatabaseError) as e:
+        except (Exception, psycopg2.DatabaseError) as e:
             # DEBUG
             print("run_querier for PostgreSQL can into an exception:")
             print(e)
-        
+
         finally:
             if postgresql_connection is not None:
                 postgresql_connection.close()
-
 
 
 class PostgreSQLQuerierFactory(QuerierFactory):

@@ -11,9 +11,9 @@ class Counter:
         with self._lock:
             return self._value
 
-    def setter(self) -> None:
+    def setter(self, increase_by: int) -> None:
         with self._lock:
-            self._value += 1
+            self._value += increase_by
 
     def __repr__(self) -> str:
         return self._value

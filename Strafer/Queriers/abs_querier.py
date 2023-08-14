@@ -1,6 +1,8 @@
 from datetime import datetime
 from abc import ABC, abstractmethod
 
+from Utilities.Counters.strafer_counters import StraferCounters
+
 
 class Querier(ABC):
 
@@ -12,6 +14,8 @@ class Querier(ABC):
         self._db_name = config_dictionary["db_name"]
         self._schema = config_dictionary["schema"]
         self._queries = config_dictionary["queries"]
+
+        self._COUNTERS = StraferCounters.StraferCounters.get_instance()
 
     def run_querier(self) -> None:
         run_start_time = datetime.now().strftime("%H:%M:%S")

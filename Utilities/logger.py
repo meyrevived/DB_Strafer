@@ -1,4 +1,6 @@
-from Utilities.main_utils import Mode
+from Utilities.Counters.strafer_counters import StraferCounters
+from main_utils import Mode, run_process
+# from Counters import *
 
 
 class Logger:
@@ -6,8 +8,11 @@ class Logger:
     def __init__(self, log_dir_path: str, mode: Mode) -> None:
         self._logging_directory_path = log_dir_path
 
-        # creates counter file
-        # call write-counters functionh
+        if mode == Mode.STRAFER:
+            self._counters = StraferCounters.StraferCounters.get_instance()
+
+        # set counters file writing to run
+        run_process(self._counters.write_to_file())
 
         # creates log file - ???
 

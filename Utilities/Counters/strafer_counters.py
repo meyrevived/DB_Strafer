@@ -25,14 +25,14 @@ class StraferCounters(Counters):
             raise SystemExit
         return StraferCounters._INSTANCE
 
-    def increase_queries_run_counter(self) -> None:
-        self._queries_run_counter.setter()
+    def increase_queries_run_counter(self, increase_by: int) -> None:
+        self._queries_run_counter.setter(increase_by)
 
-    def increase__logins_run_counter(self) -> None:
-        self._logins_run_counter.setter()
+    def increase__logins_run_counter(self, increase_by: int) -> None:
+        self._logins_run_counter.setter(increase_by)
 
-    def increase_logouts_run_counter(self) -> None:
-        self._logouts_run_counter.setter()
+    def increase_logouts_run_counter(self, increase_by: int) -> None:
+        self._logouts_run_counter.setter(increase_by)
 
-    def increase_querier_threads_run(self) -> None:
-        self._querier_threads_run.setter()
+    def increase_querier_threads_run(self, increase_by: int) -> None:
+        self._querier_threads_run.setter(increase_by)
